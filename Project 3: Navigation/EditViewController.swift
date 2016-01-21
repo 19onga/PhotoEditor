@@ -11,6 +11,7 @@ import UIKit
 class EditViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     var toolbar : UIToolbar!
+<<<<<<< HEAD
 //    var tempImageView: DrawableView!
     var tempImageView = UIImageView()
     var imageView: UIImageView = UIImageView(image: UIImage(named: "ClearImage"))
@@ -22,10 +23,23 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
     }
 
     //Drawing constants
+=======
+    var tempImageView: DrawableView!
+    var imageView: UIImageView = UIImageView(image: UIImage(named: "ClearImage"))
+//        {
+//        didSet {
+//            tempImageView.image = imageView.image
+//            tempImageView.contentMode = .ScaleAspectFit
+//        }
+//    }
+    
+//    var tempImageView = UIImageView()
+>>>>>>> 50be80201d9ea84d6b715aaea4ee5a9383de7eba
     let path=UIBezierPath()
     var previousPoint = CGPoint.zero
     var lineWidth:CGFloat=10.0
     var drawOn = false
+<<<<<<< HEAD
 //    var lastPoint = CGPoint.zero
     var red: CGFloat = (0.0/255.0) //converts RGB value to UIColor value, numerator ("0.0") = RGB value
     var green: CGFloat = (0.0/255.0)
@@ -49,6 +63,15 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
     let eraserButton = UIButton();
     var eraserOn = false
     
+=======
+    var lastPoint = CGPoint.zero
+    var red: CGFloat = 0.0
+    var green: CGFloat = 0.0
+    var blue: CGFloat = 0.0
+    var brushWidth: CGFloat = 10.0
+    var opacity: CGFloat = 1.0
+    var swiped = false
+>>>>>>> 50be80201d9ea84d6b715aaea4ee5a9383de7eba
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +79,20 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         createNavigationBar()
     }
     
+<<<<<<< HEAD
+=======
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        //Set constants
+        let width = view.bounds.width
+        let height = view.bounds.height
+        
+        // Bounds is now correctly set
+        toolbar.frame = CGRect(x: 0, y: height-height*0.1, width: width, height: height*0.1)
+    }
+    
+>>>>>>> 50be80201d9ea84d6b715aaea4ee5a9383de7eba
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.view.backgroundColor = UIColor.blackColor()
@@ -112,6 +149,7 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         toolbar = UIToolbar()
         toolbar.barStyle = UIBarStyle.Black
         
+<<<<<<< HEAD
         //Set constants
         let width = view.bounds.width
         let height = view.bounds.height
@@ -148,6 +186,37 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         dlBtn.setImage(UIImage(named: "DownloadIcon"), forState: UIControlState.Normal)
         dlBtn.addTarget(self.navigationController, action: Selector("download:"), forControlEvents:  UIControlEvents.TouchUpInside)
         let download = UIBarButtonItem(customView: dlBtn)
+=======
+        //Create Draw button
+        var drawBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        drawBtn.setImage(UIImage(named: "DrawIcon"), forState: UIControlState.Normal)
+        drawBtn.addTarget(self.navigationController, action: Selector("draw:"), forControlEvents:  UIControlEvents.TouchUpInside)
+        var draw = UIBarButtonItem(customView: drawBtn)
+        
+        //Create Effects button
+        var eftBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        eftBtn.setImage(UIImage(named: "FilterIcon"), forState: UIControlState.Normal)
+        eftBtn.addTarget(self.navigationController, action: Selector("effects:"), forControlEvents:  UIControlEvents.TouchUpInside)
+        var effects = UIBarButtonItem(customView: eftBtn)
+        
+        //Create Text button
+        var txtBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        txtBtn.setImage(UIImage(named: "TextIcon"), forState: UIControlState.Normal)
+        txtBtn.addTarget(self.navigationController, action: Selector("text:"), forControlEvents:  UIControlEvents.TouchUpInside)
+        var text = UIBarButtonItem(customView: txtBtn)
+        
+        //Create Stickers button
+        var stkrBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        stkrBtn.setImage(UIImage(named: "StickersIcon"), forState: UIControlState.Normal)
+        stkrBtn.addTarget(self.navigationController, action: Selector("stickers:"), forControlEvents:  UIControlEvents.TouchUpInside)
+        var stickers = UIBarButtonItem(customView: stkrBtn)
+        
+        //Create Download button
+        var dlBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        dlBtn.setImage(UIImage(named: "DownloadIcon"), forState: UIControlState.Normal)
+        dlBtn.addTarget(self.navigationController, action: Selector("download:"), forControlEvents:  UIControlEvents.TouchUpInside)
+        var download = UIBarButtonItem(customView: dlBtn)
+>>>>>>> 50be80201d9ea84d6b715aaea4ee5a9383de7eba
         
         //Create flexible space btwn buttons
         let space = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil,action: nil)
@@ -156,6 +225,7 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         self.view.addSubview(toolbar)
     }
     
+<<<<<<< HEAD
     let border = CGFloat(10)
 
     func draw(sender: UIButton!) {
@@ -390,6 +460,23 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
             }
     }
 
+=======
+    func draw(sender: UIButton!) {
+        var widthRatio = imageView.bounds.size.width / imageView.image!.size.width
+        var heightRatio = imageView.bounds.size.height / imageView.image!.size.height
+        var scale = min(widthRatio, heightRatio)
+        var imageWidth = scale * imageView.image!.size.width
+        var imageHeight = scale * imageView.image!.size.height
+//        drawOn = true
+//        createTempImageView()
+        tempImageView = DrawableView(frame:CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight))
+        tempImageView.center = CGPoint(x: imageView.center.x, y: imageView.center.y)
+        tempImageView.backgroundColor = UIColor.purpleColor()
+        self.view.addSubview(tempImageView)
+    }
+    
+    
+>>>>>>> 50be80201d9ea84d6b715aaea4ee5a9383de7eba
 //    func createTempImageView(){
 //        var widthRatio = imageView.bounds.size.width / imageView.image!.size.width
 //        var heightRatio = imageView.bounds.size.height / imageView.image!.size.height
@@ -402,6 +489,97 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
 //        tempImageView.backgroundColor = UIColor.purpleColor()
 //        view.insertSubview(tempImageView, aboveSubview: imageView)
 //    }
+<<<<<<< HEAD
+=======
+//    
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//            if drawOn == true{
+//            swiped = false
+//            if let touch = touches.first{
+//        lastPoint = touch.locationInView(self.view)
+//                print("touchesBegan is working")
+//            }
+//            }
+//            super.touchesBegan(touches, withEvent: event)
+//    }
+//    
+//    func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint) {
+//        var widthRatio = imageView.bounds.size.width / imageView.image!.size.width
+//        var heightRatio = imageView.bounds.size.height / imageView.image!.size.height
+//        var scale = min(widthRatio, heightRatio)
+//        var imageWidth = scale * imageView.image!.size.width
+//        var imageHeight = scale * imageView.image!.size.height
+//        
+//        // 1
+//        UIGraphicsBeginImageContext(CGSize(width: imageWidth, height: imageHeight))
+//        let context = UIGraphicsGetCurrentContext()
+//        tempImageView.image?.drawInRect(CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight))
+//
+//        // 2
+//        CGContextMoveToPoint(context, fromPoint.x, fromPoint.y)
+//        CGContextAddLineToPoint(context, toPoint.x, toPoint.y)
+//        
+//        // 3
+//        CGContextSetLineCap(context, CGLineCap.Round)
+//        CGContextSetLineWidth(context, brushWidth)
+//        CGContextSetRGBStrokeColor(context, red, green, blue, 1.0)
+//        CGContextSetBlendMode(context, CGBlendMode.Normal)
+//        
+//        // 4
+//        CGContextStrokePath(context)
+//        
+//        // 5
+//        tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
+//        tempImageView.alpha = opacity
+//        UIGraphicsEndImageContext()
+//        
+//    }
+//    
+//    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//            if drawOn == true{
+//            
+//            // 6
+//            swiped = true
+//            if let touch = touches.first{
+//                let currentPoint = touch.locationInView(view)
+//                drawLineFrom(lastPoint, toPoint: currentPoint)
+//                
+//                // 7
+//                lastPoint = currentPoint
+//            }
+//            
+//            }
+//            super.touchesMoved(touches, withEvent: event)
+//    }
+//    
+//    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        var widthRatio = imageView.bounds.size.width / imageView.image!.size.width
+//        var heightRatio = imageView.bounds.size.height / imageView.image!.size.height
+//        var scale = min(widthRatio, heightRatio)
+//        var imageWidth = scale * imageView.image!.size.width
+//        var imageHeight = scale * imageView.image!.size.height
+//        
+//        if drawOn == true{
+//            if !swiped {
+//                // draw a single point
+//                drawLineFrom(lastPoint, toPoint: lastPoint)
+//            }
+//            
+//            // Merge tempImageView into mainImageView
+//            UIGraphicsBeginImageContext(CGSize(width: imageWidth, height: imageHeight))
+//            imageView.image?.drawInRect(CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight), blendMode: CGBlendMode.Normal, alpha: 1.0)
+//            tempImageView.image?.drawInRect(CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight), blendMode: CGBlendMode.Normal, alpha: opacity)
+//            
+//            imageView.image = UIGraphicsGetImageFromCurrentImageContext()
+//            UIGraphicsEndImageContext()
+//            
+//            tempImageView.image = nil
+//            
+//            
+//        }
+//        super.touchesEnded(touches, withEvent: event)
+//    }
+>>>>>>> 50be80201d9ea84d6b715aaea4ee5a9383de7eba
     
 }
 

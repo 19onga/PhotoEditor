@@ -97,7 +97,11 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     func editButtonPressed(sender:UIButton!)
     {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary){
+<<<<<<< HEAD
             let imagePicker = UIImagePickerController()
+=======
+            var imagePicker = UIImagePickerController()
+>>>>>>> 50be80201d9ea84d6b715aaea4ee5a9383de7eba
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
             //imagePicker.mediaTypes = [kUTTypeImage];
