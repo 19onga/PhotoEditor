@@ -20,6 +20,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="dap-TT-JwG"/>
+                    <connections>
+                        <segue destination="dRi-yb-GvR" kind="show" id="WgP-QU-cja"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -36,16 +39,7 @@
                     <view key="view" contentMode="scaleToFill" id="WbZ-Hg-Rad">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yzo-Um-VsX">
-                                <rect key="frame" x="0.0" y="51" width="600" height="505"/>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="yzo-Um-VsX" secondAttribute="trailing" id="1fL-Cz-xxd"/>
-                            <constraint firstItem="yzo-Um-VsX" firstAttribute="leading" secondItem="WbZ-Hg-Rad" secondAttribute="leadingMargin" id="Vyr-g3-pRT"/>
-                        </constraints>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>

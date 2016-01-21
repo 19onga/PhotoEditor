@@ -25,6 +25,7 @@
 		37C6DB4F1BCDB42500678CA1 /* RedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DB4E1BCDB42500678CA1 /* RedViewController.swift */; };
 		37C6DB511BCDB4D000678CA1 /* BlueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DB501BCDB4D000678CA1 /* BlueViewController.swift */; };
 		37C6DB531BCDBC1700678CA1 /* RandomColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DB521BCDBC1700678CA1 /* RandomColorViewController.swift */; };
+		37ED4F851C4EA4FB00E593F3 /* ColorSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ED4F841C4EA4FB00E593F3 /* ColorSlider.swift */; };
 		37F016721BD1F47F00E1ABD2 /* ShapeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F016711BD1F47F00E1ABD2 /* ShapeViewController.swift */; };
 		37F7C4C81C29AA9700E60E54 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C4C71C29AA9700E60E54 /* CollectionViewCell.swift */; };
 		37F7C4CC1C29ABA500E60E54 /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C4CB1C29ABA500E60E54 /* NewViewController.swift */; };
@@ -70,6 +71,7 @@
 		37C6DB4E1BCDB42500678CA1 /* RedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RedViewController.swift; path = "Project 3: Navigation/RedViewController.swift"; sourceTree = "<group>"; };
 		37C6DB501BCDB4D000678CA1 /* BlueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlueViewController.swift; path = "Project 3: Navigation/BlueViewController.swift"; sourceTree = "<group>"; };
 		37C6DB521BCDBC1700678CA1 /* RandomColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RandomColorViewController.swift; path = "Project 3: Navigation/RandomColorViewController.swift"; sourceTree = "<group>"; };
+		37ED4F841C4EA4FB00E593F3 /* ColorSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSlider.swift; sourceTree = "<group>"; };
 		37F016711BD1F47F00E1ABD2 /* ShapeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShapeViewController.swift; path = "Project 3: Navigation/ShapeViewController.swift"; sourceTree = "<group>"; };
 		37F7C4C71C29AA9700E60E54 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		37F7C4CB1C29ABA500E60E54 /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				37C6DB221BCDAE6F00678CA1 /* ViewController.swift */,
 				37C6DB241BCDAE6F00678CA1 /* Main.storyboard */,
 				370CCA9B1C2B354200158E4B /* EditViewController.swift */,
+				37ED4F841C4EA4FB00E593F3 /* ColorSlider.swift */,
 				37B51FD01C3F67ED006CF170 /* DrawableView.swift */,
 				3720AD3E1C385C9300A27DE3 /* Assets 14-28-53-981.xcassets */,
 				37C6DB291BCDAE6F00678CA1 /* LaunchScreen.storyboard */,
@@ -327,6 +330,7 @@
 				37C6DB511BCDB4D000678CA1 /* BlueViewController.swift in Sources */,
 				37B51FD11C3F67ED006CF170 /* DrawableView.swift in Sources */,
 				37F016721BD1F47F00E1ABD2 /* ShapeViewController.swift in Sources */,
+				37ED4F851C4EA4FB00E593F3 /* ColorSlider.swift in Sources */,
 				37C6DB211BCDAE6F00678CA1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
