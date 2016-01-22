@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-<<<<<<< HEAD
 //        let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 //        var viewController = ViewController()
 //        let nav = UINavigationController(rootViewController: viewController)
@@ -27,12 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nav.viewControllers = [secondView, mainView]
         self.window!.rootViewController = nav
         self.window?.makeKeyAndVisible()
-=======
-        let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        var viewController = ViewController()
-        let nav = UINavigationController(rootViewController: viewController)
-        appdelegate.window!.rootViewController = nav
->>>>>>> 50be80201d9ea84d6b715aaea4ee5a9383de7eba
         return true
         // Override point for customization after application launch.
     }

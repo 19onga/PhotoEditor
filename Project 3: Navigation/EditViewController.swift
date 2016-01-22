@@ -11,8 +11,6 @@ import UIKit
 class EditViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     var toolbar : UIToolbar!
-<<<<<<< HEAD
-//    var tempImageView: DrawableView!
     var tempImageView = UIImageView()
     var imageView: UIImageView = UIImageView(image: UIImage(named: "ClearImage"))
         {
@@ -23,76 +21,47 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
     }
 
     //Drawing constants
-=======
-    var tempImageView: DrawableView!
-    var imageView: UIImageView = UIImageView(image: UIImage(named: "ClearImage"))
-//        {
-//        didSet {
-//            tempImageView.image = imageView.image
-//            tempImageView.contentMode = .ScaleAspectFit
-//        }
-//    }
-    
-//    var tempImageView = UIImageView()
->>>>>>> 50be80201d9ea84d6b715aaea4ee5a9383de7eba
-    let path=UIBezierPath()
-    var previousPoint = CGPoint.zero
-    var lineWidth:CGFloat=10.0
-    var drawOn = false
-<<<<<<< HEAD
-//    var lastPoint = CGPoint.zero
-    var red: CGFloat = (0.0/255.0) //converts RGB value to UIColor value, numerator ("0.0") = RGB value
-    var green: CGFloat = (0.0/255.0)
-    var blue: CGFloat = (0.0/255.0)
-    var brushWidth: CGFloat = 10.0
-    var swiped = false
-    
     var lastPoint: CGPoint!
     var isSwiping: Bool!
     
-    //Drawing sliders' constants
+    //Drawing sliders' layout constants
+    let topbkd = UIView()
+    let line = UIImageView()
     let background = UIView()
     let space = CGFloat(20)
     
+    //Size slider constants
+    let sizeSldr = UISlider()
     var size: CGFloat = 9
     var sizeValue = UILabel()
+    
+    //Opacity slider constants
+    let opacSldr = UISlider()
     var opacity: CGFloat = 1.0
     var opacityValue = UILabel()
+    
+    //Color slider constants
+    let colorSlider = ColorSlider()
     var strokeColor = UIColor.blackColor()
+
+    //Drawing buttons constants
+    let doneBtn = UIButton()
+    let cancelBtn = UIButton()
     
-    let eraserButton = UIButton();
+    let eraserBtn = UIButton()
     var eraserOn = false
+
+    let randomBtn = UIButton()
+    var random = false
     
-=======
-    var lastPoint = CGPoint.zero
-    var red: CGFloat = 0.0
-    var green: CGFloat = 0.0
-    var blue: CGFloat = 0.0
-    var brushWidth: CGFloat = 10.0
-    var opacity: CGFloat = 1.0
-    var swiped = false
->>>>>>> 50be80201d9ea84d6b715aaea4ee5a9383de7eba
+    let downBtn = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createToolBar()
-        createNavigationBar()
+        //createNavigationBar()
     }
     
-<<<<<<< HEAD
-=======
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        //Set constants
-        let width = view.bounds.width
-        let height = view.bounds.height
-        
-        // Bounds is now correctly set
-        toolbar.frame = CGRect(x: 0, y: height-height*0.1, width: width, height: height*0.1)
-    }
-    
->>>>>>> 50be80201d9ea84d6b715aaea4ee5a9383de7eba
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.view.backgroundColor = UIColor.blackColor()
@@ -149,7 +118,6 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         toolbar = UIToolbar()
         toolbar.barStyle = UIBarStyle.Black
         
-<<<<<<< HEAD
         //Set constants
         let width = view.bounds.width
         let height = view.bounds.height
@@ -186,37 +154,6 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         dlBtn.setImage(UIImage(named: "DownloadIcon"), forState: UIControlState.Normal)
         dlBtn.addTarget(self.navigationController, action: Selector("download:"), forControlEvents:  UIControlEvents.TouchUpInside)
         let download = UIBarButtonItem(customView: dlBtn)
-=======
-        //Create Draw button
-        var drawBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        drawBtn.setImage(UIImage(named: "DrawIcon"), forState: UIControlState.Normal)
-        drawBtn.addTarget(self.navigationController, action: Selector("draw:"), forControlEvents:  UIControlEvents.TouchUpInside)
-        var draw = UIBarButtonItem(customView: drawBtn)
-        
-        //Create Effects button
-        var eftBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        eftBtn.setImage(UIImage(named: "FilterIcon"), forState: UIControlState.Normal)
-        eftBtn.addTarget(self.navigationController, action: Selector("effects:"), forControlEvents:  UIControlEvents.TouchUpInside)
-        var effects = UIBarButtonItem(customView: eftBtn)
-        
-        //Create Text button
-        var txtBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        txtBtn.setImage(UIImage(named: "TextIcon"), forState: UIControlState.Normal)
-        txtBtn.addTarget(self.navigationController, action: Selector("text:"), forControlEvents:  UIControlEvents.TouchUpInside)
-        var text = UIBarButtonItem(customView: txtBtn)
-        
-        //Create Stickers button
-        var stkrBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        stkrBtn.setImage(UIImage(named: "StickersIcon"), forState: UIControlState.Normal)
-        stkrBtn.addTarget(self.navigationController, action: Selector("stickers:"), forControlEvents:  UIControlEvents.TouchUpInside)
-        var stickers = UIBarButtonItem(customView: stkrBtn)
-        
-        //Create Download button
-        var dlBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        dlBtn.setImage(UIImage(named: "DownloadIcon"), forState: UIControlState.Normal)
-        dlBtn.addTarget(self.navigationController, action: Selector("download:"), forControlEvents:  UIControlEvents.TouchUpInside)
-        var download = UIBarButtonItem(customView: dlBtn)
->>>>>>> 50be80201d9ea84d6b715aaea4ee5a9383de7eba
         
         //Create flexible space btwn buttons
         let space = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil,action: nil)
@@ -225,24 +162,111 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         self.view.addSubview(toolbar)
     }
     
-<<<<<<< HEAD
     let border = CGFloat(10)
 
     func draw(sender: UIButton!) {
+        //Create copy of image to draw on
         createTempImageView()
-        UIView.animateWithDuration(0.5, animations: {self.toolbar.center.y = self.view.bounds.height*2})
+        
+        //Create background for cancel & done button
+        topbkd.frame = CGRectMake(0,0, view.bounds.width, view.bounds.height*(1.2/16))
+        topbkd.center = CGPoint(x: view.bounds.width/2, y: -view.bounds.height*2)
+        topbkd.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.4)
+        self.view.addSubview(topbkd)
+        
+        createTopBkdBtns()
         
         //Create background for sliders
         background.frame = CGRectMake(0,0, view.bounds.width, view.bounds.height*(1/4))
-        background.backgroundColor = UIColor.blueColor().colorWithAlphaComponent(0.3)
-        background.center = CGPoint(x: view.bounds.width/2, y: view.bounds.height-background.frame.height/2)
+        background.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.4)
+        background.center = CGPoint(x: view.bounds.width/2, y: view.bounds.height*2)
+        UIView.animateWithDuration(0.3, animations: {
+            self.toolbar.center.y = self.view.bounds.height*2
+            self.background.center.y = self.view.bounds.height-self.background.frame.height/2
+            self.topbkd.center.y = self.topbkd.frame.height/2
+        })
         self.view.addSubview(background)
         
+        //Create sliders & buttons
+        createSliders()
+        createColorSlider()
+        createButtons()
+        
+        //Reset tools to original state
+        resetDrawTools()
+    }
+    
+    func createTopBkdBtns() {
+        //Create constants
+        let size = topbkd.frame.height*(5/8) //size for done button
+        let size2 = topbkd.frame.height*(4.7/8) //size for cancel button
+        let topWidth = topbkd.frame.width
+        let topHeight = topbkd.frame.height
+        
+        //Create line to separate buttons
+        line.frame = CGRectMake(0, 0, topWidth/10, topHeight-25)
+        line.image = UIImage(named: "Line")
+        line.center = CGPoint(x: topWidth/2, y: topHeight*(5/8))
+        topbkd.addSubview(line)
+        
+        //Create done button
+        doneBtn.frame = CGRectMake(0, 0, size, size)
+        doneBtn.center = CGPoint(x: topWidth*(3/4), y: topHeight*(5/8))
+        doneBtn.setImage(UIImage(named: "Done"), forState: .Normal)
+        doneBtn.addTarget(self, action: "done:", forControlEvents: .TouchUpInside)
+        topbkd.addSubview(doneBtn)
+        
+        //Create cancel button
+        cancelBtn.frame = CGRectMake(0, 0, size2, size2)
+        cancelBtn.center = CGPoint(x: topWidth/4, y: topHeight*(5/8))
+        cancelBtn.setImage(UIImage(named: "Cancel"), forState: .Normal)
+        cancelBtn.addTarget(self, action: "cancel:", forControlEvents: .TouchUpInside)
+        topbkd.addSubview(cancelBtn)
+    }
+    
+    func done(sender: UIButton!){
+        //Get width & height of scaled image
+        let widthRatio = imageView.bounds.size.width / imageView.image!.size.width
+        let heightRatio = imageView.bounds.size.height / imageView.image!.size.height
+        let scale = min(widthRatio, heightRatio)
+        let imageWidth = scale * imageView.image!.size.width
+        let imageHeight = scale * imageView.image!.size.height
+        
+        //Draw bitmap that is the size of scaled image, scales based on phone screensize,
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: imageWidth, height: imageHeight), false, 0.0);
+        imageView.image?.drawInRect(CGRectMake(0, 0, imageWidth, imageHeight))
+        tempImageView.image?.drawInRect(CGRectMake(0, 0, imageWidth, imageHeight))
+        tempImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+    
+        imageView.image = screenshot
+        tempImageView.image = nil
+        downBtnPressed(doneBtn)
+    }
+    
+    func cancel(sender: UIButton!){
+        tempImageView.image = nil
+        tempImageView.removeFromSuperview()
+        downBtnPressed(cancelBtn)
+    }
+    
+    func createSliders() {
         //Create constants
         let height = background.frame.height
         let cy = height/6
-
-        createSlider("Size")
+        
+        //Create size slider
+        sizeSldr.frame = CGRectMake(border, 0, view.bounds.width*(3/4), view.bounds.height*(1/16)) //Set x location as border so slider & label are aligned
+        sizeSldr.continuous = true
+        sizeSldr.tintColor = .whiteColor()
+        sizeSldr.setThumbImage(UIImage(named: "whiteCircle"), forState: .Normal)
+        sizeSldr.minimumValue = 1
+        sizeSldr.maximumValue = 50
+        sizeSldr.value = Float(size)
+        sizeSldr.addTarget(self, action: "changedSize:", forControlEvents: .ValueChanged)
+        sizeSldr.center.y = space + cy*2.7
+        background.addSubview(sizeSldr)
         
         //Creat size label
         let sizeLabel = UILabel(frame: CGRectMake(border, 0, 65, 50))
@@ -262,7 +286,17 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         sizeValue.center = CGPoint(x: border + sizeLabel.frame.width, y: sizeLabel.center.y)
         background.addSubview(sizeValue)
         
-        createSlider("Opacity")
+        //Create opacity slider
+        opacSldr.frame = CGRectMake(border, 0, view.bounds.width*(3/4), view.bounds.height*(1/16)) //Set x location as border so slider & label are aligned
+        opacSldr.continuous = true
+        opacSldr.tintColor = .whiteColor()
+        opacSldr.setThumbImage(UIImage(named: "whiteCircle"), forState: .Normal)
+        opacSldr.minimumValue = 0.0
+        opacSldr.maximumValue = 1.0
+        opacSldr.value = Float(opacity)
+        opacSldr.addTarget(self, action: "changedOpacity:", forControlEvents: .ValueChanged)
+        opacSldr.center.y = space + cy*4.7
+        background.addSubview(opacSldr)
         
         //Create opacity label
         let opacityLabel = UILabel(frame: CGRectMake(border, 0, 65, 50))
@@ -272,7 +306,7 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         opacityLabel.text = "Opacity:"
         opacityLabel.center.y = cy*4.7 - space/2
         background.addSubview(opacityLabel)
-
+        
         //Create opacity value
         opacityValue.frame = CGRectMake(0, 0, 60, 40)
         opacityValue.textAlignment = NSTextAlignment.Left
@@ -281,57 +315,16 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         opacityValue.text = "\(opacity*100)%"
         opacityValue.center = CGPoint(x: border*3.5 + opacityLabel.frame.width, y: opacityLabel.center.y)
         background.addSubview(opacityValue)
-        
-        createColorSlider()
-        createButtons()
-    }
-    
-    func createSlider(type: String) {
-        //Create constants
-        let height = background.frame.height
-        let cy = height/6
-        
-        //Set properties that are the same for all sliders
-        let slider = UISlider(frame:CGRectMake(border, 0, view.bounds.width*(3/4), view.bounds.height*(1/16))) //Set x location as border so slider & label are aligned
-        slider.continuous = true
-        slider.tintColor = .whiteColor()
-        slider.setThumbImage(UIImage(named: "whiteCircle"), forState: .Normal)
-        
-        //Set specific properties for slider
-        switch type{
-        case "Size":
-            slider.minimumValue = 1
-            slider.maximumValue = 50
-            slider.value = Float(size)
-            slider.addTarget(self, action: "changedSize:", forControlEvents: .ValueChanged)
-            slider.center.y = space + cy*2.7
-        case "Opacity":
-            slider.minimumValue = 0.0
-            slider.maximumValue = 1.0
-            slider.value = Float(opacity)
-            slider.addTarget(self, action: "changedOpacity:", forControlEvents: .ValueChanged)
-            slider.center.y = space + cy*4.7
-        default:
-            break;
-        }
-        
-        //Add slider to background view
-        background.addSubview(slider)
     }
     
     //1/20 TO DO:
-//    *Create preview that changes color, size, and opacity
-//    *When press eraser, change image to blue eraser image
-//    *Set eraser stroke to certain size and opacity
-//    *Implement random color button
-//    *Create uitoolbar for cancel "X" & done "v/"
+//    *Glitch: when take screenshot, opaque colors become brighter
     
     func createColorSlider() {
         //Set constant
         let width = background.frame.width
         
         //Create slider
-        let colorSlider = ColorSlider()
         colorSlider.frame = CGRectMake(width*(9/10), space, 10, 150)
         colorSlider.borderColor = UIColor.whiteColor()
         colorSlider.previewEnabled = true
@@ -360,20 +353,124 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         let size = background.frame.height/5
         
         //Create eraser button
-        eraserButton.frame = CGRectMake(border, height/11, size, size) // X, Y, width, height
-        eraserButton.setImage(UIImage(named: "EraserWhite"), forState: .Normal)
-        eraserButton.addTarget(self, action: "eraserPressed:", forControlEvents: .TouchUpInside)
+        eraserBtn.frame = CGRectMake(border, height/11, size, size) // X, Y, width, height
+        eraserBtn.backgroundColor = UIColor.clearColor()
+        eraserBtn.layer.cornerRadius = 5
+        eraserBtn.layer.borderWidth = 1
+        eraserBtn.layer.borderColor = UIColor.whiteColor().CGColor
+        eraserBtn.imageEdgeInsets = UIEdgeInsetsMake(4, 4, 4, 4)
+        eraserBtn.setImage(UIImage(named: "EraserWhite"), forState: .Normal)
+        changeBtnColor(eraserBtn, origImage: UIImage(named: "EraserWhite")!, tintClr: .blackColor(), ctrlState: .Selected)
+        eraserBtn.addTarget(self, action: "eraserPressed:", forControlEvents: .TouchUpInside)
         
         //Create random color button
+        randomBtn.frame = CGRectMake(border*3 + eraserBtn.frame.width, height/11, size, size)
+        randomBtn.backgroundColor = UIColor.clearColor()
+        randomBtn.layer.cornerRadius = 5
+        randomBtn.layer.borderWidth = 1
+        randomBtn.layer.borderColor = UIColor.whiteColor().CGColor
+        randomBtn.imageEdgeInsets = UIEdgeInsetsMake(4, 4, 4, 4)
+        randomBtn.setImage(UIImage(named: "MustacheWhite"), forState: .Normal)
+        randomBtn.addTarget(self, action: "randomBtnPressed:", forControlEvents: .TouchUpInside)
+        
+        //Create down button
+        downBtn.frame = CGRectMake(0, 0, height/8, height/9)
+        downBtn.center = CGPoint(x: width/2, y: border)
+        downBtn.setImage(UIImage(named: "DownArrow"), forState: .Normal)
+        downBtn.addTarget(self, action: "downBtnPressed:", forControlEvents: .TouchUpInside)
         
         //Add buttons to background view
-        background.addSubview(eraserButton)
+        background.addSubview(eraserBtn)
+        background.addSubview(randomBtn)
+        background.addSubview(downBtn)
     }
     
     func eraserPressed(sender: UIButton!){
         eraserOn = !eraserOn
-        eraserButton.selected = eraserOn
-        eraserButton.setImage(UIImage(named: "EraserHighlighted"), forState: .Selected)
+        
+        //Change button color when buttton is selected
+        eraserBtn.selected = eraserOn
+        
+        //Change button's background & border when button is/isn't selected
+        if eraserOn == true{
+            eraserBtn.backgroundColor = .whiteColor()
+            eraserBtn.layer.borderColor = UIColor.blackColor().CGColor
+        }
+        else {
+            eraserBtn.backgroundColor = UIColor.clearColor()
+            eraserBtn.layer.borderColor = UIColor.whiteColor().CGColor
+        }
+    }
+    
+    func randomBtnPressed(sender: UIButton!){
+        //Random btn is on
+        random = true
+        
+        //Generate random color & assign it to stroke color
+        let randomColor = getRandomColor()
+        strokeColor = randomColor
+        
+        //Change button color when buttton is selected
+        randomBtn.selected = random
+        changeBtnColor(randomBtn, origImage: UIImage(named: "MustacheWhite")!, tintClr: randomColor, ctrlState: .Selected)
+        
+        if random == true{
+            randomBtn.backgroundColor = .whiteColor()
+            randomBtn.layer.borderColor = randomColor.CGColor
+        }
+        else {
+            randomBtn.backgroundColor = UIColor.clearColor()
+            randomBtn.layer.borderColor = UIColor.whiteColor().CGColor
+        }
+    }
+  
+    func getRandomColor() -> UIColor{
+        let randomRed:CGFloat = CGFloat(drand48())
+        let randomGreen:CGFloat = CGFloat(drand48())
+        let randomBlue:CGFloat = CGFloat(drand48())
+        return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
+    }
+    
+    func changeBtnColor(button: UIButton, origImage: UIImage, tintClr: UIColor, ctrlState: UIControlState){
+        let tintedImage = origImage.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        button.setImage(tintedImage, forState: ctrlState)
+        button.tintColor = tintClr
+    }
+    
+    func downBtnPressed(sender: UIButton!){
+        //Create constant
+        let viewheight = view.bounds.height
+        
+        //Move toolbar back up & background back down
+        UIView.animateWithDuration(0.3, animations: {
+            self.toolbar.center.y = viewheight*0.9 + self.toolbar.frame.size.height/2
+            self.background.center.y = viewheight*2
+            self.topbkd.center.y = -viewheight*2
+        })
+        
+        //Remove image from tempImageView & remove tempImageView
+        tempImageView.image = nil
+        tempImageView.removeFromSuperview()
+    }
+    
+    func resetDrawTools(){
+        sizeSldr.value = 9
+        sizeValue.text = "9.0"
+        size = 9
+        
+        opacSldr.value = 1.0
+        opacityValue.text = "100%"
+        opacity = 1.0
+        
+        strokeColor = UIColor.blackColor()
+
+        eraserBtn.selected = false
+        eraserBtn.backgroundColor = UIColor.clearColor()
+        eraserBtn.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        randomBtn.selected = false
+        randomBtn.backgroundColor = UIColor.clearColor()
+        randomBtn.layer.borderColor = UIColor.whiteColor().CGColor
     }
     
     func createTempImageView(){
@@ -451,7 +548,7 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
                 //If eraser button pressed, set blendmode to clear
                 if eraserOn == true{
                     CGContextSetBlendMode(UIGraphicsGetCurrentContext(), CGBlendMode.Clear)
-                    CGContextSetLineWidth(UIGraphicsGetCurrentContext(), size)
+                    CGContextSetLineWidth(UIGraphicsGetCurrentContext(), 20)
                 }
                 
                 CGContextStrokePath(UIGraphicsGetCurrentContext())
@@ -459,128 +556,6 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
                 UIGraphicsEndImageContext()
             }
     }
-
-=======
-    func draw(sender: UIButton!) {
-        var widthRatio = imageView.bounds.size.width / imageView.image!.size.width
-        var heightRatio = imageView.bounds.size.height / imageView.image!.size.height
-        var scale = min(widthRatio, heightRatio)
-        var imageWidth = scale * imageView.image!.size.width
-        var imageHeight = scale * imageView.image!.size.height
-//        drawOn = true
-//        createTempImageView()
-        tempImageView = DrawableView(frame:CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight))
-        tempImageView.center = CGPoint(x: imageView.center.x, y: imageView.center.y)
-        tempImageView.backgroundColor = UIColor.purpleColor()
-        self.view.addSubview(tempImageView)
-    }
-    
-    
->>>>>>> 50be80201d9ea84d6b715aaea4ee5a9383de7eba
-//    func createTempImageView(){
-//        var widthRatio = imageView.bounds.size.width / imageView.image!.size.width
-//        var heightRatio = imageView.bounds.size.height / imageView.image!.size.height
-//        var scale = min(widthRatio, heightRatio)
-//        var imageWidth = scale * imageView.image!.size.width
-//        var imageHeight = scale * imageView.image!.size.height
-//
-//        tempImageView = UIImageView(frame:CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight))
-//        tempImageView.center = CGPoint(x: imageView.center.x, y: imageView.center.y)
-//        tempImageView.backgroundColor = UIColor.purpleColor()
-//        view.insertSubview(tempImageView, aboveSubview: imageView)
-//    }
-<<<<<<< HEAD
-=======
-//    
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//            if drawOn == true{
-//            swiped = false
-//            if let touch = touches.first{
-//        lastPoint = touch.locationInView(self.view)
-//                print("touchesBegan is working")
-//            }
-//            }
-//            super.touchesBegan(touches, withEvent: event)
-//    }
-//    
-//    func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint) {
-//        var widthRatio = imageView.bounds.size.width / imageView.image!.size.width
-//        var heightRatio = imageView.bounds.size.height / imageView.image!.size.height
-//        var scale = min(widthRatio, heightRatio)
-//        var imageWidth = scale * imageView.image!.size.width
-//        var imageHeight = scale * imageView.image!.size.height
-//        
-//        // 1
-//        UIGraphicsBeginImageContext(CGSize(width: imageWidth, height: imageHeight))
-//        let context = UIGraphicsGetCurrentContext()
-//        tempImageView.image?.drawInRect(CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight))
-//
-//        // 2
-//        CGContextMoveToPoint(context, fromPoint.x, fromPoint.y)
-//        CGContextAddLineToPoint(context, toPoint.x, toPoint.y)
-//        
-//        // 3
-//        CGContextSetLineCap(context, CGLineCap.Round)
-//        CGContextSetLineWidth(context, brushWidth)
-//        CGContextSetRGBStrokeColor(context, red, green, blue, 1.0)
-//        CGContextSetBlendMode(context, CGBlendMode.Normal)
-//        
-//        // 4
-//        CGContextStrokePath(context)
-//        
-//        // 5
-//        tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
-//        tempImageView.alpha = opacity
-//        UIGraphicsEndImageContext()
-//        
-//    }
-//    
-//    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//            if drawOn == true{
-//            
-//            // 6
-//            swiped = true
-//            if let touch = touches.first{
-//                let currentPoint = touch.locationInView(view)
-//                drawLineFrom(lastPoint, toPoint: currentPoint)
-//                
-//                // 7
-//                lastPoint = currentPoint
-//            }
-//            
-//            }
-//            super.touchesMoved(touches, withEvent: event)
-//    }
-//    
-//    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        var widthRatio = imageView.bounds.size.width / imageView.image!.size.width
-//        var heightRatio = imageView.bounds.size.height / imageView.image!.size.height
-//        var scale = min(widthRatio, heightRatio)
-//        var imageWidth = scale * imageView.image!.size.width
-//        var imageHeight = scale * imageView.image!.size.height
-//        
-//        if drawOn == true{
-//            if !swiped {
-//                // draw a single point
-//                drawLineFrom(lastPoint, toPoint: lastPoint)
-//            }
-//            
-//            // Merge tempImageView into mainImageView
-//            UIGraphicsBeginImageContext(CGSize(width: imageWidth, height: imageHeight))
-//            imageView.image?.drawInRect(CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight), blendMode: CGBlendMode.Normal, alpha: 1.0)
-//            tempImageView.image?.drawInRect(CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight), blendMode: CGBlendMode.Normal, alpha: opacity)
-//            
-//            imageView.image = UIGraphicsGetImageFromCurrentImageContext()
-//            UIGraphicsEndImageContext()
-//            
-//            tempImageView.image = nil
-//            
-//            
-//        }
-//        super.touchesEnded(touches, withEvent: event)
-//    }
->>>>>>> 50be80201d9ea84d6b715aaea4ee5a9383de7eba
-    
 }
 
 
