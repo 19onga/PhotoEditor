@@ -10,6 +10,7 @@ import UIKit
 
 class EditViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    //View controller constants
     var toolbar : UIToolbar!
     var tempImageView = UIImageView()
     var imageView: UIImageView = UIImageView(image: UIImage(named: "ClearImage"))
@@ -19,6 +20,9 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
             tempImageView.contentMode = .ScaleAspectFit
         }
     }
+    var editbkd = UIView()
+    var editTitle = UILabel()
+    var backBtn = UIButton()
 
     //Drawing constants
     var lastPoint: CGPoint!
@@ -29,7 +33,8 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
     let line = UIImageView()
     let background = UIView()
     let space = CGFloat(20)
-    
+    let border = CGFloat(10) //To align slider & label
+
     //Size slider constants
     let sizeSldr = UISlider()
     var size: CGFloat = 9
@@ -58,14 +63,56 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.blackColor()
+
+        //Create edit background
+        editbkd.frame = CGRectMake(0,0, view.bounds.width, view.bounds.height*(1.2/16))
+        editbkd.center = CGPoint(x: view.bounds.width/2, y: -view.bounds.height*2)
+        editbkd.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.4)
+        self.view.addSubview(editbkd)
+        
+        //Create constants
+        let editWid = editbkd.frame.width
+        let editHgt = editbkd.frame.height
+        let backSize = editbkd.frame.width*0.12
+        
+        //Create edit title
+        editTitle.frame = CGRectMake(0, 0, editWid/4, editHgt)
+        editTitle.center = CGPoint(x: editWid/2, y: editHgt/2 + 5)
+        editTitle.textAlignment = NSTextAlignment.Center
+        editTitle.font = UIFont (name: "AvenirNext-Regular", size: 20)
+        editTitle.textColor = UIColor.whiteColor()
+        editTitle.text = "Edit"
+        editbkd.addSubview(editTitle)
+        
+        //Create back button
+        backBtn.frame = CGRectMake(0, 0, backSize, backSize)
+        backBtn.center = CGPoint(x: editWid*(1/16), y: editHgt*(5/8))
+        backBtn.setImage(UIImage(named: "Back"), forState: .Normal)
+        backBtn.addTarget(self, action: "back:", forControlEvents: .TouchUpInside)
+        editbkd.addSubview(backBtn)
+        
         createToolBar()
+        
+        //Animate
+        UIView.animateWithDuration(0.3, animations: {
+            self.toolbar.center.y = 0.9*self.view.bounds.height + self.toolbar.frame.height/2
+            self.editbkd.center.y = self.editbkd.frame.height/2
+        })
+        
         //createNavigationBar()
+    }
+    
+    func back(sender: UIButton!){
+        self.dismissViewControllerAnimated(true, completion: nil)
+        if let navigationController = self.navigationController
+        {
+            navigationController.popViewControllerAnimated(true)
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.view.backgroundColor = UIColor.blackColor()
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         createImageView()
     }
     
@@ -88,35 +135,10 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         self.view.addSubview(imageView)
     }
     
-    func createNavigationBar(){
-        //Set constants
-        let width = view.bounds.width
-        let height = view.bounds.height
-        
-        // Create the navigation bar
-        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, width, height*0.1))
-        navigationBar.barTintColor = UIColor.whiteColor()
-        
-        //Create navigation bar's title
-        self.navigationController?.navigationBar.topItem?.title = "Edit"
-        navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 34)!, NSForegroundColorAttributeName: UIColor.whiteColor()]
-        
-        //Create back button
-        let backBtn = UIButton(type: UIButtonType.Custom)
-        backBtn.frame = CGRectMake(0, 0, 50, 50)
-        backBtn.setImage(UIImage(named: "BackIcon"), forState: UIControlState.Normal)
-        backBtn.addTarget(self, action: "back:", forControlEvents: UIControlEvents.TouchUpInside)
-        backBtn.sizeToFit()
-        let backButtonItem = UIBarButtonItem(customView: backBtn)
-        self.navigationItem.leftBarButtonItem = backButtonItem
-        
-        //Add navigation bar to view
-        self.view.addSubview(navigationBar)
-    }
-    
     func createToolBar(){
         toolbar = UIToolbar()
-        toolbar.barStyle = UIBarStyle.Black
+        //toolbar.barStyle = UIBarStyle.Black
+        toolbar.barTintColor = UIColor.darkGrayColor()
         
         //Set constants
         let width = view.bounds.width
@@ -124,7 +146,8 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         
         // Bounds is now correctly set
         toolbar.frame = CGRect(x: 0, y: height-height*0.1, width: width, height: height*0.1)
-
+        toolbar.center = CGPoint(x: width/2, y: height*2)
+        
         //Create Draw button
         let drawBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         drawBtn.setImage(UIImage(named: "DrawIcon"), forState: UIControlState.Normal)
@@ -161,8 +184,6 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         toolbar.items = [draw, space, effects, space, text, space, stickers, space, download]
         self.view.addSubview(toolbar)
     }
-    
-    let border = CGFloat(10)
 
     func draw(sender: UIButton!) {
         //Create copy of image to draw on
@@ -180,13 +201,15 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         background.frame = CGRectMake(0,0, view.bounds.width, view.bounds.height*(1/4))
         background.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.4)
         background.center = CGPoint(x: view.bounds.width/2, y: view.bounds.height*2)
+        self.view.addSubview(background)
+        
+        //Dismiss toolbar & edit bar. Show drawing toolbar & top bar.
         UIView.animateWithDuration(0.3, animations: {
             self.toolbar.center.y = self.view.bounds.height*2
+            self.editbkd.center.y = -self.view.bounds.height*2
             self.background.center.y = self.view.bounds.height-self.background.frame.height/2
             self.topbkd.center.y = self.topbkd.frame.height/2
         })
-        self.view.addSubview(background)
-        
         //Create sliders & buttons
         createSliders()
         createColorSlider()
@@ -198,7 +221,7 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     func createTopBkdBtns() {
         //Create constants
-        let size = topbkd.frame.height*(5/8) //size for done button
+        let size1 = topbkd.frame.height*(5/8) //size for done button
         let size2 = topbkd.frame.height*(4.7/8) //size for cancel button
         let topWidth = topbkd.frame.width
         let topHeight = topbkd.frame.height
@@ -210,7 +233,7 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         topbkd.addSubview(line)
         
         //Create done button
-        doneBtn.frame = CGRectMake(0, 0, size, size)
+        doneBtn.frame = CGRectMake(0, 0, size1, size1)
         doneBtn.center = CGPoint(x: topWidth*(3/4), y: topHeight*(5/8))
         doneBtn.setImage(UIImage(named: "Done"), forState: .Normal)
         doneBtn.addTarget(self, action: "done:", forControlEvents: .TouchUpInside)
@@ -319,6 +342,11 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     //1/20 TO DO:
 //    *Glitch: when take screenshot, opaque colors become brighter
+//    *Create back button to go to camera roll
+//    *Fix transtion from camera roll to editviewcontroller to slide from right
+//    *Set SOLID color for edit, top, & drawing bars & toolbar
+//    *Save image to Camera library, share on FB, Twitter, Instagram
+//    *Use tab view controller to make switching around for text
     
     func createColorSlider() {
         //Set constant
@@ -350,10 +378,10 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         //Set constants
         let width = background.frame.width
         let height = background.frame.height
-        let size = background.frame.height/5
+        let drawBtnSize = background.frame.height/5
         
         //Create eraser button
-        eraserBtn.frame = CGRectMake(border, height/11, size, size) // X, Y, width, height
+        eraserBtn.frame = CGRectMake(border, height/11, drawBtnSize, drawBtnSize) // X, Y, width, height
         eraserBtn.backgroundColor = UIColor.clearColor()
         eraserBtn.layer.cornerRadius = 5
         eraserBtn.layer.borderWidth = 1
@@ -364,7 +392,7 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         eraserBtn.addTarget(self, action: "eraserPressed:", forControlEvents: .TouchUpInside)
         
         //Create random color button
-        randomBtn.frame = CGRectMake(border*3 + eraserBtn.frame.width, height/11, size, size)
+        randomBtn.frame = CGRectMake(border*3 + eraserBtn.frame.width, height/11, drawBtnSize, drawBtnSize)
         randomBtn.backgroundColor = UIColor.clearColor()
         randomBtn.layer.cornerRadius = 5
         randomBtn.layer.borderWidth = 1
@@ -444,6 +472,7 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
         //Move toolbar back up & background back down
         UIView.animateWithDuration(0.3, animations: {
             self.toolbar.center.y = viewheight*0.9 + self.toolbar.frame.size.height/2
+            self.editbkd.center.y = self.editbkd.frame.height/2
             self.background.center.y = viewheight*2
             self.topbkd.center.y = -viewheight*2
         })
@@ -557,5 +586,31 @@ class EditViewController: UIViewController, UINavigationControllerDelegate, UIIm
             }
     }
 }
+
+//    func createNavigationBar(){
+//        //Set constants
+//        let width = view.bounds.width
+//        let height = view.bounds.height
+//
+//        // Create the navigation bar
+//        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, width, height*0.1))
+//        navigationBar.barTintColor = UIColor.whiteColor()
+//
+//        //Create navigation bar's title
+//        self.navigationController?.navigationBar.topItem?.title = "Edit"
+//        navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 34)!, NSForegroundColorAttributeName: UIColor.whiteColor()]
+//
+//        //Create back button
+//        let backBtn = UIButton(type: UIButtonType.Custom)
+//        backBtn.frame = CGRectMake(0, 0, 50, 50)
+//        backBtn.setImage(UIImage(named: "BackIcon"), forState: UIControlState.Normal)
+//        backBtn.addTarget(self, action: "back:", forControlEvents: UIControlEvents.TouchUpInside)
+//        backBtn.sizeToFit()
+//        let backButtonItem = UIBarButtonItem(customView: backBtn)
+//        self.navigationItem.leftBarButtonItem = backButtonItem
+//
+//        //Add navigation bar to view
+//        self.view.addSubview(navigationBar)
+//    }
 
 

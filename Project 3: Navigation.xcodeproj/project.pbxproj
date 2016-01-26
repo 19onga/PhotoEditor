@@ -21,11 +21,7 @@
 		37C6DB2B1BCDAE6F00678CA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37C6DB291BCDAE6F00678CA1 /* LaunchScreen.storyboard */; };
 		37C6DB361BCDAE6F00678CA1 /* Project_3__NavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DB351BCDAE6F00678CA1 /* Project_3__NavigationTests.swift */; };
 		37C6DB411BCDAE6F00678CA1 /* Project_3__NavigationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DB401BCDAE6F00678CA1 /* Project_3__NavigationUITests.swift */; };
-		37C6DB4F1BCDB42500678CA1 /* RedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DB4E1BCDB42500678CA1 /* RedViewController.swift */; };
-		37C6DB511BCDB4D000678CA1 /* BlueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DB501BCDB4D000678CA1 /* BlueViewController.swift */; };
-		37C6DB531BCDBC1700678CA1 /* RandomColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DB521BCDBC1700678CA1 /* RandomColorViewController.swift */; };
 		37ED4F851C4EA4FB00E593F3 /* ColorSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ED4F841C4EA4FB00E593F3 /* ColorSlider.swift */; };
-		37F016721BD1F47F00E1ABD2 /* ShapeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F016711BD1F47F00E1ABD2 /* ShapeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,11 +59,7 @@
 		37C6DB3C1BCDAE6F00678CA1 /* Project 3: NavigationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project 3: NavigationUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C6DB401BCDAE6F00678CA1 /* Project_3__NavigationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project_3__NavigationUITests.swift; sourceTree = "<group>"; };
 		37C6DB421BCDAE6F00678CA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		37C6DB4E1BCDB42500678CA1 /* RedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RedViewController.swift; path = "Project 3: Navigation/RedViewController.swift"; sourceTree = "<group>"; };
-		37C6DB501BCDB4D000678CA1 /* BlueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlueViewController.swift; path = "Project 3: Navigation/BlueViewController.swift"; sourceTree = "<group>"; };
-		37C6DB521BCDBC1700678CA1 /* RandomColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RandomColorViewController.swift; path = "Project 3: Navigation/RandomColorViewController.swift"; sourceTree = "<group>"; };
 		37ED4F841C4EA4FB00E593F3 /* ColorSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSlider.swift; sourceTree = "<group>"; };
-		37F016711BD1F47F00E1ABD2 /* ShapeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShapeViewController.swift; path = "Project 3: Navigation/ShapeViewController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +99,6 @@
 		37C6DB141BCDAE6F00678CA1 = {
 			isa = PBXGroup;
 			children = (
-				37F7C4C61C29AA5300E60E54 /* Old Project Classes */,
 				37B00B401C24F9AD00E7BA45 /* Fonts */,
 				37C6DB1F1BCDAE6F00678CA1 /* Project 3: Navigation */,
 				37C6DB341BCDAE6F00678CA1 /* Project 3: NavigationTests */,
@@ -158,17 +149,6 @@
 				37C6DB421BCDAE6F00678CA1 /* Info.plist */,
 			);
 			path = "Project 3: NavigationUITests";
-			sourceTree = "<group>";
-		};
-		37F7C4C61C29AA5300E60E54 /* Old Project Classes */ = {
-			isa = PBXGroup;
-			children = (
-				37F016711BD1F47F00E1ABD2 /* ShapeViewController.swift */,
-				37C6DB521BCDBC1700678CA1 /* RandomColorViewController.swift */,
-				37C6DB501BCDB4D000678CA1 /* BlueViewController.swift */,
-				37C6DB4E1BCDB42500678CA1 /* RedViewController.swift */,
-			);
-			name = "Old Project Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,10 +290,6 @@
 			files = (
 				370CCA9C1C2B354200158E4B /* EditViewController.swift in Sources */,
 				37C6DB231BCDAE6F00678CA1 /* ViewController.swift in Sources */,
-				37C6DB4F1BCDB42500678CA1 /* RedViewController.swift in Sources */,
-				37C6DB531BCDBC1700678CA1 /* RandomColorViewController.swift in Sources */,
-				37C6DB511BCDB4D000678CA1 /* BlueViewController.swift in Sources */,
-				37F016721BD1F47F00E1ABD2 /* ShapeViewController.swift in Sources */,
 				37ED4F851C4EA4FB00E593F3 /* ColorSlider.swift in Sources */,
 				37C6DB211BCDAE6F00678CA1 /* AppDelegate.swift in Sources */,
 			);
